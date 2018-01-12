@@ -1,0 +1,90 @@
+{% extends 'polls/base.html' %}
+
+{% block 'content' %}
+<div style="margin: 20px 0;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="{% if not signup %}active{% endif %}"><a href="#signin" aria-controls="signin" role="tab" data-toggle="tab">Войти</a></li>
+        <li role="presentation" class="{% if signup %}active{% endif %}"><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Зарегистрироваться</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane {% if not signup %}active{% endif %}" id="signin">
+            <form action="{% url 'login' %}" class="form-horizontal" method="POST" style="max-width: 480px; margin: 20px auto;">
+                {% csrf_token %}
+                <div class="form-group {% for err in login_form.username.errors %}has-error{% endfor %}">
+                    {% for err in login_form.username.errors %}
+                    <p class="text-danger">{{ err }}</p>
+                    {% endfor %}
+                    <label for="id_email1" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_email1" name="username" placeholder="Email" value="{{ login_form.username.value }}">
+                    </div>
+                </div>
+                <div class="form-group {% for err in login_form.password.errors %}has-error{% endfor %}">
+                    {% for err in login_form.password.errors %}
+                    <p class="text-danger">{{ err }}</p>
+                    {% endfor %}
+                    <label for="id_password1" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="id_password1" name="password" placeholder="Password">
+                    </div>
+                </div>
+                {% for err in login_form.non_field_errors %}
+                <p class="text-danger">{{ err }}</p>
+                {% endfor %}
+                {% if error %}
+                <p class="text-danger">{{ error }}</p>
+                {% endif %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Log In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div role="tabpanel" class="tab-pane {% if signup %}active{% endif %}" id="signup">
+            <form action="{% url 'signup' %}" class="form-horizontal" method="POST" style="max-width: 480px; margin: 20px auto;">
+                {% csrf_token %}
+                <div class="form-group {% for err in signup_form.username.errors %}has-error{% endfor %}">
+                    {% for err in signup_form.username.errors %}
+                    <p class="text-danger">{{ err }}</p>
+                    {% endfor %}
+                    <label for="id_email2" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="id_email2" name="username" placeholder="Email" value="{{ signup_form.username.value }}">
+                    </div>
+                </div>
+                <div class="form-group {% for err in signup_form.password.errors %}has-error{% endfor %}">
+                    {% for err in signup_form.password.errors %}
+                    <p class="text-danger">{{ err }}</p>
+                    {% endfor %}
+                    <label for="id_password2" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="id_password2" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group {% for err in signup_form.repassword.errors %}has-error{% endfor %}">
+                    {% for err in signup_form.repassword.errors %}
+                    <p class="text-danger">{{ err }}</p>
+                    {% endfor %}
+                    <label for="id_password3" class="col-sm-2 control-label">Password (retype)</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="id_password3" name="repassword" placeholder="Retype Password">
+                    </div>
+                </div>
+                {% for err in signup_form.non_field_errors %}
+                <p class="text-danger">{{ err }}</p>
+                {% endfor %}
+                {% if error %}
+                <p class="text-danger">{{ error }}</p>
+                {% endif %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
