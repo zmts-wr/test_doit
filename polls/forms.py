@@ -5,6 +5,7 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
 
+
 class SignUpForm(forms.Form):
     username = forms.EmailField()
     password = forms.CharField()
