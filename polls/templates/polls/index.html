@@ -2,4 +2,9 @@
 
 {% block 'content' %}
 <h1>Опросы для {{ user.username }}</h1>
+<ul>
+    {% for item in qgroups %}
+    <li><a href="/gr/{{ item.id }}/" >{{ item.title}}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}

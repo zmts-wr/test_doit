@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% block 'content' %}
+<h1>{{ qgroup.title }} для {{ user.username }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="{{ question.id }}" name="question_id">
+    {% if form.errors %}
+    <div class="panel panel-danger">{{ form.errors }}</div>
+    {% endif %}
+    <p>{{ question.text }}</p>
+    <ul>
+        {% for item in question.answer_set.all %}
+        <li class="radio"><label><input type="radio" name="answer" value="{{item.id}}"> {{ item.text}}</label></li>
+        {% endfor %}
+    </ul>
+    <button type="submit" class="btn btn-primary">Ответить</button>
+</form>
+{% endblock %}

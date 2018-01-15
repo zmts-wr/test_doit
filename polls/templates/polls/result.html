@@ -1,0 +1,17 @@
+{% extends 'polls/base.html' %}
+
+{% block 'content' %}
+<h1>{{ qgroup.title }} для {{ user.username }}</h1>
+<h2>Поздравляем!</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Всего ответов</th>
+        <td>{{ sum_total }}</td>
+    </tr>
+    <tr>
+        <th>Правильных</th>
+        <td>{{ sum_right }}</td>
+    </tr>
+</table>
+<a href="/">На главную</a>
+{% endblock %}

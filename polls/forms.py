@@ -17,3 +17,8 @@ class SignUpForm(forms.Form):
 
         if password != repassword:
             raise forms.ValidationError('Password retyped incorrectly')
+
+
+class AnswerForm(forms.Form):
+    question_id = forms.IntegerField()
+    answer = forms.IntegerField()
